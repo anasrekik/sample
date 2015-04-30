@@ -47,11 +47,6 @@
             <artifactId>core</artifactId>
             <version>1.47.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.api.client</groupId>
-            <artifactId>google-api-client-auth-oauth2</artifactId>
-            <version>1.2.3-alpha</version>
-        </dependency>
 
         <!-- Test Dependencies -->
         <dependency>

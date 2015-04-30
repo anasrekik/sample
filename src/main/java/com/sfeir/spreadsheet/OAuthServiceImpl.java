@@ -12,8 +12,6 @@ public class OAuthServiceImpl implements OAuthService {
 
 	@Override
 	public String getOAuthToken(final OAuthScope scope) {
-	//	LOGGER.info("Get OAuth token : scope=" + scope + ", url=" + scope.get());
-
 		final List<String> scopes = Lists.newArrayList(scope.get());
 		final AppIdentityService appIdentity = AppIdentityServiceFactory.getAppIdentityService();
 		final AppIdentityService.GetAccessTokenResult accessToken = appIdentity.getAccessToken(scopes);
@@ -23,7 +21,7 @@ public class OAuthServiceImpl implements OAuthService {
 
 	@Override
 	public Credential getCredential(final OAuthScope scope) {
-		final Credential credential = new Credential(BearerToken.authorizationHeaderAccessMethod());
+		Credential credential = new Credential(BearerToken.authorizationHeaderAccessMethod());
 		return credential.setAccessToken(getOAuthToken(scope));
 	}
 }
