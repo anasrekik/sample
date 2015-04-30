@@ -2,3 +2,7 @@ target/
 .idea
 eclipse-launch-profiles/
 sample.iml
+LICENSE
+README.md
+nbactions.xml
+
