@@ -1,8 +1,11 @@
-package com.sfeir.endpoint;
+package com.sfeir.avatar;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.gdata.util.ServiceException;
+import com.sfeir.endpoint.ReadSpreadsheet;
+
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -20,13 +23,22 @@ public class AvatarServletUpload  extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-
-        Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
-        List<BlobKey> blobKeys = blobs.get("avatar");
+        try {
+            ReadSpreadsheet.authenticate("rekika", "rekik");
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        Map<String, List<BlobKey>> blob = blobstoreService.getUploads(req);
+        List<BlobKey> blobKeys = blob.get("avatar");
         if (blobKeys == null || blobKeys.isEmpty()) {
             res.setStatus(res.SC_BAD_REQUEST);
         } else {
             res.setStatus(res.SC_OK);
+            try {
+                ReadSpreadsheet.saveBlobKey(req.getParameter("login"), blobKeys.get(0).getKeyString());
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

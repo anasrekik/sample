@@ -12,41 +12,14 @@
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
 
-
-    <!--<servlet>-->
-        <!--<servlet-name>AvatarServletUpload</servlet-name>-->
-        <!--<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>services</param-name>-->
-            <!--<param-value>com.sfeir.endpoint.AvatarServletUpload</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>AvatarServletUpload</servlet-name>-->
-        <!--<url-pattern>/upload</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>AvatarServletDownload</servlet-name>-->
-        <!--<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>services</param-name>-->
-            <!--<param-value>com.sfeir.endpoint.AvatarServletDownload</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>AvatarServletDownload</servlet-name>-->
-        <!--<url-pattern>/download</url-pattern>-->
-    <!--</servlet-mapping>-->
-
     <servlet>
         <servlet-name>AvatarServletUpload</servlet-name>
-        <servlet-class>com.sfeir.endpoint.AvatarServletUpload</servlet-class>
+        <servlet-class>com.sfeir.avatar.AvatarServletUpload</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>AvatarServletDownload</servlet-name>
-        <servlet-class>com.sfeir.endpoint.AvatarServletDownload</servlet-class>
+        <servlet-class>com.sfeir.avatar.AvatarServletDownload</servlet-class>
     </servlet>
 
     <servlet-mapping>

@@ -1,4 +1,4 @@
-package com.sfeir.endpoint;
+package com.sfeir.avatar;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;

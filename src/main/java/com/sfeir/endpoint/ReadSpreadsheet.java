@@ -18,8 +18,8 @@ public class ReadSpreadsheet {
     public static final String SPREADSHEET_URL = "https://spreadsheets.google.com/feeds/worksheets/15C9eR7gSY1EqGSTVqrBFuf01zuR8-S8NI_n66r9LZR8/private/full";
     public static final String SPREADSHEET_KEY = "15C9eR7gSY1EqGSTVqrBFuf01zuR8-S8NI_n66r9LZR8";
 
-    public static boolean authenticate(String login, String pwd) throws IOException, ServiceException {
 
+    private static ListFeed getFeeds() throws IOException, ServiceException {
         final SpreadsheetService spreadsheetService = new SpreadsheetService("CloudServices");
         spreadsheetService.setConnectTimeout(0);
 
@@ -33,9 +33,12 @@ public class ReadSpreadsheet {
         URL listFeedUrl = entries.get(0).getListFeedUrl();
         // Logger.getLogger("logger").warning("worksheet id : "+entries.get(0).getId());
         // Get entries
-        ListFeed feed = (ListFeed) spreadsheetService.getFeed(listFeedUrl, ListFeed.class);
+        return (ListFeed) spreadsheetService.getFeed(listFeedUrl, ListFeed.class);
+    }
 
-        for (ListEntry entry : feed.getEntries()) {
+    public static boolean authenticate(String login, String pwd) throws IOException, ServiceException {
+
+        for (ListEntry entry : getFeeds().getEntries()) {
             if (login.equals(entry.getCustomElements().getValue("Login"))) {
                 if (pwd.equals(entry.getCustomElements().getValue("Password"))) {
                     return true;
@@ -45,5 +48,13 @@ public class ReadSpreadsheet {
             }
         }
         return false;
+    }
+
+    public static void saveBlobKey(String login, String key) throws IOException, ServiceException {
+        for (ListEntry entry : getFeeds().getEntries()) {
+            if (login.equals(entry.getCustomElements().getValue("Login"))) {
+                entry.getCustomElements().setValueLocal("PhotoKey",key);
+            }
+        }
     }
 }
