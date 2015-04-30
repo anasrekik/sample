@@ -8,6 +8,7 @@ package com.sfeir.endpoint;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.datastore.Blob;
 import com.google.gdata.util.ServiceException;
 
 import javax.inject.Named;
@@ -39,24 +40,4 @@ public class YourFirstAPI {
         }
         return response;
     }
-
-    @ApiMethod(name = "saveAvatar")
-    public void saveAvatar(@Named("login") String login, @Named("avatar") File avatar) {
-        try {
-            AvatarStorage.writeToFile(login, avatar);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @ApiMethod(name = "getAvatar")
-    public File getAvatar(@Named("login") String login) {
-        try {
-            return AvatarStorage.readFromFile(login);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }
